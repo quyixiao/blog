@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',
 ]
 # 中间件
 MIDDLEWARE = [
@@ -73,13 +74,29 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# connnet = '{}://{}:{}@{}:{}/{}'.format(
+#     'mysql+pymysql',
+#     'ldd_biz', 'Hello1234',
+#     '172.16.157.238', 3306,
+#     'test',
+# )
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',
+        'USER': 'ldd_biz',
+        'PASSWORD': 'Hello1234',
+        'HOST': '172.16.157.238',
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
