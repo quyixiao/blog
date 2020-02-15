@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Application definition 安装的app
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+# 中间件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,9 +48,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+# 包名下的 模块 ，url 的配制都从这个开始
 ROOT_URLCONF = 'blog.urls'
-
+# 模版配制
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,7 +83,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
+# 用户验证相关
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -116,5 +116,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+# 静态文件相关
 STATIC_URL = '/static/'
