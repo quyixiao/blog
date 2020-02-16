@@ -51,11 +51,11 @@ MIDDLEWARE = [
 ]
 # 包名下的 模块 ，url 的配制都从这个开始
 ROOT_URLCONF = 'blog.urls'
-# 模版配制
+# 模版配制,全局模板，找指定的模版路径，
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

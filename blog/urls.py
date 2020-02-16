@@ -15,18 +15,32 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpRequest
+from django.shortcuts import render
+from django.template import loader, RequestContext
 
-def index(request):
+
+# 模板
+# 如果使用了react实现前端页面，其实Django就没有必要使用模板，它其实就是一个后台服务程序，接收请求，响应数据，接口设计就是可以纯粹的
+# restful风格
+# 模板的目的就是为可视化，将数据按照一定的布局格式输出，而不是为了处理数据，所以一般会有复杂的处理逻辑，模板的引入实现业务数据逻辑和显示
+# 格式分离，这样，在开发中，就可分工协作了，页面开发完成页面的布局设计，后台开发完成数据处理逻辑实现，做的最多的是分工和迭代。
+# Python 的模板引擎默认使用Django template language(DTL)) 构建
+# 模板配置
+# 在Settting.py 中设置模板项目的路径
+# 点号的查的，
+#
+
+def index(request: HttpRequest):
     print(request)
     print(type(request))
-
-
-    return JsonResponse({'user':'hello word'})
+    """视图函数:请求进来返回响应"""
+    # return render(request,'index.html',{'content':'abc'}) # 这个是模板技术搭建出来的网页
+    return JsonResponse({'content': 'abc'})
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index$',index),
-    url(r'^$',index)
+    url(r'^index$', index),
+    url(r'^$', index)
 ]
