@@ -13,13 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
-from django.http import HttpResponse, JsonResponse, HttpRequest
-from django.shortcuts import render
-from django.template import loader, RequestContext
-
-
 # 模板
 # 如果使用了react实现前端页面，其实Django就没有必要使用模板，它其实就是一个后台服务程序，接收请求，响应数据，接口设计就是可以纯粹的
 # restful风格
@@ -31,16 +24,10 @@ from django.template import loader, RequestContext
 # 点号的查的，
 #
 
-def index(request: HttpRequest):
-    print(request)
-    print(type(request))
-    """视图函数:请求进来返回响应"""
-    # return render(request,'index.html',{'content':'abc'}) # 这个是模板技术搭建出来的网页
-    return JsonResponse({'content': 'abc'})
-
+from django.conf.urls import url,include
+from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index$', index),
-    url(r'^$', index)
+    url(r'^user/', include('user.urls'))
 ]
