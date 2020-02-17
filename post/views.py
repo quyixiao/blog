@@ -35,7 +35,14 @@ def pub(request: HttpRequest):
 
 
 def get(request: HttpRequest, id):
-    print(id)
+    try:
+        post_id = int(id)
+
+
+    except Exception as e:
+        print(e)
+        return HttpResponseBadRequest()
+
     return HttpResponse(b'get')
 
 
