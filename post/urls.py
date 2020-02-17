@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .views import pub,get,getall
+from .views import pub, get, getall
 
 urlpatterns = [
     url(r'^pub$', pub),
