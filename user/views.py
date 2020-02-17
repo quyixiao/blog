@@ -1,3 +1,4 @@
+import bcrypt
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,20 +11,24 @@ from user.models import User
 import logging
 import simplejson
 from django.conf import settings
+import jwt
 
-def checkemail(request: HttpRequest):
-    # 判断email
-    return True
-
+import datetime
 
 # 根logging 如果没有创建的话，
 FORMAT = '%(asctime)s 【%(levelname)s】 [%(filename)s:%(lineno)d] %(message)s'
 logging.basicConfig(level=logging.INFO, format=FORMAT)
 
 
+def checkemail(request: HttpRequest):
+    # 判断email
+    return True
+
+
 def get_token(user_id):
-    j = simplejson.dumps({'user_id':user_id})
-    
+    return jwt.encode({'user_id': user_id, 'timestamp': int(datetime.datetime.now().timestamp())}, settings.SECRET_KEY,
+                      'HS256').decode()
+
 
 # 异常处理
 # 出现获取输入框提交信息异常，就返回异常
@@ -69,15 +74,17 @@ def reg(request: HttpRequest):
     print(request.POST)
     try:
         try:
-            #qs = User.objects.get(pk=1) #  User matching query does not exist.,当主键没有12的时候抛出这个异常
-            #qs = User.objects.filter(pk=1).all()
+            print(222222222222222222222, settings.SECRET_KEY)
+            print(11111111111111111, get_token(10))
+            # qs = User.objects.get(pk=1) #  User matching query does not exist.,当主键没有12的时候抛出这个异常
+            # qs = User.objects.filter(pk=1).all()
             qs = User.objects.filter(pk__lte=1).all()
             print(qs.query)
             print(qs)
-        except Exception as e :
+        except Exception as e:
             logging.error(e)
         finally:
-            print('*'*30)
+            print('*' * 30)
 
         print('------------------------------------')
         data = simplejson.loads(request.body)
@@ -86,8 +93,8 @@ def reg(request: HttpRequest):
         user = User()
         user.name = data['name']
         user.email = data['email']
-        user.password = data['password']
-
+        password = data['password']
+        user.password = bcrypt.hashpw(password.encode(),bcrypt.gensalt())
         qs = User.objects.filter(email=user.email)  # <class 'django.db.models.manager.Manager'>
 
         print(qs.query)
@@ -97,8 +104,9 @@ def reg(request: HttpRequest):
             return HttpResponseBadRequest()
         print(user.password)
 
+
         user.save()
-        return JsonResponse({"user_id": user.id})
+        return JsonResponse({"token": get_token(user.id)})
 
     except Exception as e:
         logging.error(e)
