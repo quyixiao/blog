@@ -108,7 +108,7 @@ def authenticate(view):
     def wapper(request: HttpRequest):
         # 提取出用户提交的
         token = request.META.get('HTTP_JWT')
-        logging.info(token)
+        logging.info('用户登陆：' + token)
         try:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')  # 时间自动较验
             request.user = User.objects.filter(pk=payload['user_id']).get()
