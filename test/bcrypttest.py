@@ -25,4 +25,9 @@ import datetime
 # 这次使用PYJWT ，它是Python 对JWT 的实现方式
 # 从user 表中的email 找出匹配的一条记录,验证密码
 # 验证通过说明是合法的用户登录，显示欢迎页面
+# 功能，
+# 发布（增加） pub ,post ,/pub
+# 看文章（查） get  get (\d+)
+# 列表分页    getall get /
+# 创建博文应用
 #
