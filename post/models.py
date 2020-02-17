@@ -18,7 +18,7 @@ class Post(models.Model):
     # 内容
 
     def __repr__(self):
-        return "<Post {} {} >".format(self.id, self.title)
+        return "<Post {} {} {} {} [{}] >".format(self.id, self.title,self.author,self.content,self.author.id)
 
     __str__ = __repr__
 
@@ -32,6 +32,6 @@ class Content(models.Model):
     content = models.TextField(null=False)
 
     def __repr__(self):
-        return "<Content {} {} >".format(self.id, self.content[:40])
+        return "<Content {} {} {} >".format(self.id,self.post.id, self.content[:40])
 
     __str__ = __repr__
