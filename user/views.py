@@ -98,6 +98,7 @@ def login(request: HttpRequest):
         }, 'token': token
         })
         res.set_cookie('Jwt', token)
+        logging.info(res)
         return res
     except Exception as e:
         logging.error(e)
